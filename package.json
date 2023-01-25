@@ -1,0 +1,25 @@
+{
+  "name": "i_scream_social",
+  "version": "1.0.0",
+  "description": "A social networking API built using Mongoose and Express.js in which users can \"scream\" about their thoughts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ggorosave/I_Scream_Social.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ggorosave/I_Scream_Social/issues"
+  },
+  "homepage": "https://github.com/ggorosave/I_Scream_Social#readme",
+  "dependencies": {
+    "dayjs": "^1.11.7",
+    "express": "^4.18.2",
+    "mongoose": "^6.9.0"
+  }
+}
