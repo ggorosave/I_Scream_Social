@@ -41,6 +41,9 @@ const screamSchema = new Schema(
 // getter method to change the format of the timestamp
 screamSchema.path('createdAt').get(function (v) { return dayjs(v).format('MM/DD/YYYY') });
 
+// virtual to retrieve the length of the reactions
+screamSchema.virtual('reactionCount').get(function () { return this.reactions.length }); 
+
 // creates collection using schema for model
 const Scream = model('scream', screamSchema);
 
