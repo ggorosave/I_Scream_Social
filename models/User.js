@@ -30,8 +30,20 @@ const userSchema = new Schema(
         },
         // screams - reference screams here
         // friends - reference users here (self-reference)
+    },
+    {
+        toJSON: {
+            getters: true;
+        }
     }
 );
+
+// virtual to retrieve the length of the user's friends
+userSchema
+    .virtual('friendCount')
+    .get(function () {
+        return this.friends.length;
+    });
 
 // creates collection using userSchema for the model
 const User = model('user', userSchema);
