@@ -1,6 +1,3 @@
-// 2. require subdoc?
-// 3. build schema
-
 // imports Schema and model APIs from mongoose
 const { Schema, model } = require('mongoose');
 

@@ -1,7 +1,25 @@
-// 1. import express
-// 2. import connection
 // 3. import routes
-// 4. create port
-// 5. create express app
 // 6. call middleware
-// 7. create connection to db
+
+
+// imports express
+const exp = require('constants');
+const express = require('express');
+// imports connection 
+const db = require('./config/connection');
+// TODO: import routes
+
+const PORT = 3001;
+const app = express();
+
+// middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// TODO: use routes
+
+// Why open?
+db.once('open', () => {
+    app.listen(PORT, () => {
+        console.log(`API server is running on port ${PORT}`)
+    });
+});
