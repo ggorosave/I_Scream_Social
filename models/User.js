@@ -24,8 +24,16 @@ const userSchema = new Schema(
                 message: 'Not a valid email!'
             }
         },
-        // screams - reference screams here
+        // screams - reference screams
+        screams: {
+            type: Schema.Types.ObjectId,
+            ref: 'Scream',
+        },
         // friends - reference users here (self-reference)
+        friends: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        }
     },
     {
         toJSON: {

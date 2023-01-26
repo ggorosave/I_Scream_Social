@@ -9,6 +9,8 @@
 const { Schema, model } = require('mongoose');
 // imports dayjs
 const dayjs = require('dayjs');
+// imports reactionSchema
+const reactionSchema = require('./Reaction')
 
 // Schema to create Scream model
 const screamSchema = new Schema(
@@ -27,7 +29,8 @@ const screamSchema = new Schema(
             type: String,
             required: true,
         },
-        // import reactions subdoc and set them in an array here
+        // importz reactions subdoc and set them in an array here
+        reactions: [reactionSchema],
     },
     {
         toJSON: {
