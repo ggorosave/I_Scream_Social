@@ -1,13 +1,10 @@
-// 3. import routes
-// 6. call middleware
-
-
 // imports express
 const exp = require('constants');
 const express = require('express');
 // imports connection 
 const db = require('./config/connection');
-// TODO: import routes
+// imports routes
+const routes = require('./routes')
 
 const PORT = 3001;
 const app = express();
@@ -15,7 +12,7 @@ const app = express();
 // middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// TODO: use routes
+app.use(routes);
 
 // Why open?
 db.once('open', () => {

@@ -10,17 +10,19 @@
 */
 
 const { ObjectId } = require('mongoose').Types;
-const { User, Scream } = require('../models');
+// Change back later?
+// const { User, Scream } = require('../models/User');
+const User = require('../models/User');
 
 module.exports = {
 
     // method to get all users
-    getUser(req, res) {
+    getUsers(req, res) {
 
         // used the find method to get all user data
         User.find()
             // then async function to return user data in json format
-            .then(async (user) => {
+            .then((user) => {
                 // DELETE? or put everything in an object first before returning
                 // const userObj = {
                 //     user,
@@ -35,5 +37,13 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
-    
+    // getSingleUser
+    createUser(req, res) {
+        User.create(req.body)
+            .then((user) => res.json(user))
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).json(err);
+            });
+    },
 };

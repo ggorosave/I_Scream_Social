@@ -16,7 +16,7 @@ const userSchema = new Schema(
             unique: true,
             validate: {
                 validator: function (v) {
-                    return /^([\w-_\.])+@([\w-]+\.)+([\w-]{2,4}])$/i.test(v);
+                    return /^([\w\_\-\.])+@([\w\-]+\.)+([\w\-]{2,4})$/i.test(v);
                 },
                 message: 'Not a valid email!'
             }
@@ -27,10 +27,10 @@ const userSchema = new Schema(
             ref: 'Scream',
         },
         // friends - reference users here (self-reference)
-        friends: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-        }
+        // friends: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'User',
+        // }
     },
     {
         toJSON: {
@@ -42,11 +42,11 @@ const userSchema = new Schema(
 );
 
 // virtual to retrieve the length of the user's friends
-userSchema
-    .virtual('friendCount')
-    .get(function () {
-        return this.friends.length;
-    });
+// userSchema
+//     .virtual('friendCount')
+//     .get(function () {
+//         return this.friends.length;
+//     });
 
 // creates collection using userSchema for the model
 const User = model('user', userSchema);
