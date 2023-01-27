@@ -27,10 +27,10 @@ const userSchema = new Schema(
             ref: 'Scream',
         },
         // friends - reference users here (self-reference)
-        // friends: {
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'User',
-        // }
+        friends: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        }
     },
     {
         toJSON: {

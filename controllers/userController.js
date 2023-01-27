@@ -22,22 +22,23 @@ module.exports = {
         // used the find method to get all user data
         User.find()
             // then async function to return user data in json format
-            .then((user) => {
-                // DELETE? or put everything in an object first before returning
-                // const userObj = {
-                //     user,
-                // };
-
-                // returns the user data as a javascript object (looks like JSON)
-                return res.json(user);
-            })
+            .then((user) => res.json(user))
             // catches errors
             .catch((err) => {
                 console.log(err);
                 return res.status(500).json(err);
             });
     },
-    // getSingleUser
+    // Untested
+    getSingleUser(req, res) {
+        User.findOne({ _id: req.params.userId })
+            .populate('screams', 'friends')
+            .then((user) => !post ? res.status(404).json({ message: 'Could not find user with the given ID!' }) : res.json(user))
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).json(err);
+            });
+    },
     createUser(req, res) {
         User.create(req.body)
             .then((user) => res.json(user))
@@ -46,4 +47,17 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
+    // Untested
+    updateUser(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $set: req.body }, 
+            { new: true }
+            )
+            .then((user) => !post ? res.status(404).json({ message: 'Could not find user with the given ID!' }) : res.json(user))
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).json(err);
+            });
+    }
 };
