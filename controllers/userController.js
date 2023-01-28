@@ -52,6 +52,7 @@ module.exports = {
     updateUser(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
+            // updates using what's in the body
             { $set: req.body },
             { new: true }
         )
