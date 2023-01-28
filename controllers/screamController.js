@@ -49,10 +49,23 @@ module.exports = {
                     : res.json({ message: 'Scream successfully deleted' })
             )
             .catch((err) => res.status(500).json(err));
-
     },
     // UNTESTED
-    // addReaction
+    addReaction(req, res) {
+        Scream.findOneAndUpdate(
+            { _id: req.params.screamId },
+            { $addToSet: { reactions: req.body } },
+            { runValidators: true, new: true }
+        )
+            .then((scream) =>
+                !scream
+                    ? res.status(404).json({ message: 'Could not find a scream with the given ID' })
+                    : res.json(scream)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
     // UNTESTED
-    // removeReaction
+    removeReaction(req, res) {
+        
+    }
 };
