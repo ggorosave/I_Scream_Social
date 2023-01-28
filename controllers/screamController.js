@@ -31,15 +31,26 @@ module.exports = {
             { $set: req.body },
             { runValidators: true, new: true }
         )
-        .then((scream) =>
-        !scream
-            ? res.status(404).json({ message: 'Could not find a scream with the given ID' })
-            : res.json(scream)
-        )
-        .catch((err) => res.status(500).json(err));
+            .then((scream) =>
+                !scream
+                    ? res.status(404).json({ message: 'Could not find a scream with the given ID' })
+                    : res.json(scream)
+            )
+            .catch((err) => res.status(500).json(err));
     },
     // UNTESTED
-    // deleteScream
+    deleteScream(req, res) {
+        Scream.findOneAndDelete(
+            { _id: req.params.screamId }
+        )
+            .then((scream) =>
+                !scream
+                    ? res.status(404).json({ message: 'Could not find a scream with the given ID' })
+                    : res.json({ message: 'Scream successfully deleted' })
+            )
+            .catch((err) => res.status(500).json(err));
+
+    },
     // UNTESTED
     // addReaction
     // UNTESTED

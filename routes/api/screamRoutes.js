@@ -3,11 +3,12 @@ const {
     getScreams,
     createScream,
     getSingleScream,
-    updateScream
+    updateScream,
+    deleteScream
 } = require('../../controllers/screamController');
 
 // /api/screams
 router.route('/').get(getScreams).post(createScream);
 
 // /api/screams/:screamId
-router('/:screamId').get(getSingleScream).put(updateScream)
+router('/:screamId').get(getSingleScream).put(updateScream).delete(deleteScream)
