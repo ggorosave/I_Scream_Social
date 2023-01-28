@@ -10,6 +10,8 @@ module.exports = {
     },
     createScream(req, res) {
         Scream.create(req.body)
+            .then((scream) => res.json(scream))
+            .catch((err) => res.status(500).json(err));
     }
     // getSingleScream
     // updateScream

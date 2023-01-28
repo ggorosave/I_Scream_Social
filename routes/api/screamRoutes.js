@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const {
-    getScreams
+    getScreams,
+    createScream
 } = require('../../controllers/screamController');
 
 // /api/screams
-router.route('/').get(getScreams)
+router.route('/').get(getScreams).post(createScream);
