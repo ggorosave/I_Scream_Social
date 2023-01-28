@@ -41,6 +41,7 @@ const userSchema = new Schema(
     }
 );
 
+// UNCOMMENT LATER
 // virtual to retrieve the length of the user's friends
 // userSchema
 //     .virtual('friendCount')

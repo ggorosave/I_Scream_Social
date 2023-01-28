@@ -11,8 +11,9 @@
 
 const { ObjectId } = require('mongoose').Types;
 // Change back later?
-// const { User, Scream } = require('../models/User');
+// const { User, Scream } = require('../models');
 const User = require('../models/User');
+const Scream = require('../models/Scream');
 
 module.exports = {
 
@@ -51,10 +52,73 @@ module.exports = {
     updateUser(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
-            { $set: req.body }, 
+            { $set: req.body },
             { new: true }
+        )
+            .then((user) => !user
+                ? res.status(404).json({ message: 'Could not find user with the given ID!' })
+                : res.json(user)
             )
-            .then((user) => !post ? res.status(404).json({ message: 'Could not find user with the given ID!' }) : res.json(user))
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).json(err);
+            });
+    },
+    // Untested
+    deleteUser(req, res) {
+
+        // finds user by id
+        User.findOneAndRemove({ _id: req.params.userId })
+            .then((user) => {
+                !user
+                    ? res.status(404).json({ message: 'Could not find user with the given ID!' })
+
+                    // finds screams with the associated user id
+                    : Scream.findOneAndUpdate(
+                        { users: req.params.userId },
+
+                        // removes scream with the associated user id
+                        { $pull: { users: req.params.userId } },
+                        { new: true }
+                    )
+            })
+            .then((scream) => {
+                !scream
+                    ? res.status(404).json({ message: 'Could not find screams with the given user ID!' })
+                    : res.json({ message: 'User successfully deleted' })
+            })
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).json(err);
+            });
+    },
+    // UNTESTED
+    addFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $addToSet: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
+        )
+            .then((user) => !user
+                ? res.status(404).json({ message: 'Could not find user with the given ID!' })
+                : res.json(user)
+            )
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).json(err);
+            });
+    },
+    // UNTESTED
+    removeFriend(req, res) {
+        user.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
+        )
+            .then((user) => !user
+                ? res.status(404).json({ message: 'Could not find user with the given ID!' })
+                : res.json(user)
+            )
             .catch((err) => {
                 console.log(err);
                 return res.status(500).json(err);
