@@ -20,3 +20,5 @@ router.route('/:screamId/reactions').post(addReaction);
 
 // /api/screams/:screamId/reactions/:reactionId
 router.route('/:screamId/reactions/:reactionId').delete(removeReaction);
+
+module.exports = router;
