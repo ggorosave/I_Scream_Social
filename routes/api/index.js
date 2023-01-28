@@ -1,10 +1,12 @@
 // api folder router index
 const router = require('express').Router();
-// import user and scream routers here
 const userRoutes = require('./userRoutes');
+const screamRoutes = require('./screamRoutes');
 
-// define routes here
+// /api
 router.use('/users', userRoutes);
+router.use('/screams', screamRoutes);
+
 
 
 module.exports = router;
