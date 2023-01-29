@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongoose').Types;
 const Scream = require('../models/Scream');
+const User = require('../models/User');
 
 module.exports = {
     // UNTESTED
@@ -21,7 +22,18 @@ module.exports = {
     // UNTESTED
     createScream(req, res) {
         Scream.create(req.body)
-            .then((scream) => res.json(scream))
+            .then((scream) => {
+                return User.findOneAndUpdate(
+                    { _id: req.body.userId },
+                    { $addToSet: { screams: scream._id } },
+                    { new: true }
+                );
+            })
+            .then((user) => 
+                !user
+                    ? res.status(404).json({ message: 'Scream created, but found no user with that ID'})
+                    : res.json({ message: 'Scream created!'})
+            )
             .catch((err) => res.status(500).json(err));
     },
     // UNTESTED

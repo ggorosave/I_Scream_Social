@@ -22,7 +22,7 @@ const screamSchema = new Schema(
             type: String,
             required: true,
         },
-        // importz reactions subdoc and set them in an array here
+        // imports reactions subdoc and set them in an array here
         reactions: [reactionSchema],
     },
     {
