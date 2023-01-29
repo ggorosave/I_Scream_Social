@@ -3,13 +3,11 @@ const Scream = require('../models/Scream');
 const User = require('../models/User');
 
 module.exports = {
-    // UNTESTED
     getScreams(req, res) {
         Scream.find()
             .then((screams) => res.json(screams))
             .catch((err) => res.status(500).json(err));
     },
-    // UNTESTED
     getSingleScream(req, res) {
         Scream.findOne({ _id: req.params.screamId })
             .then((scream) =>
@@ -19,7 +17,6 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    // UNTESTED
     createScream(req, res) {
         Scream.create(req.body)
             .then((scream) => {
@@ -36,7 +33,6 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    // UNTESTED
     updateScream(req, res) {
         Scream.findOneAndUpdate(
             { _id: req.params.screamId },
@@ -50,7 +46,6 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    // UNTESTED
     deleteScream(req, res) {
         Scream.findOneAndDelete(
             { _id: req.params.screamId }
@@ -76,7 +71,6 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    // UNTESTED
     removeReaction(req, res) {
         Scream.findOneAndUpdate(
             { _id: req.params.screamId },
