@@ -30,9 +30,9 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
-    // Untested
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId })
+        // TODO: fix
             .populate('screams', 'friends')
             .then((user) => !user ? res.status(404).json({ message: 'Could not find user with the given ID!' }) : res.json(user))
             .catch((err) => {
@@ -48,7 +48,6 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
-    // Untested
     updateUser(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -65,7 +64,7 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
-    // Untested
+    // Untested - check whether scream removed
     deleteUser(req, res) {
 
         // finds user by id
@@ -93,7 +92,6 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
-    // UNTESTED
     addFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -111,7 +109,7 @@ module.exports = {
     },
     // UNTESTED
     removeFriend(req, res) {
-        user.findOneAndUpdate(
+        User.findOneAndUpdate(
             { _id: req.params.userId },
             { $pull: { friends: req.params.friendId } },
             { runValidators: true, new: true }
