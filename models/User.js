@@ -42,12 +42,10 @@ const userSchema = new Schema(
 );
 
 // virtual to retrieve the length of the user's friends
-// TODO: fix
 userSchema
     .virtual('friendCount')
-    .get(async function () {
-        friendsLength = await this.friends.length;
-        return friendsLength;
+    .get(function () {
+        return this.friends.length;
     });
 
 // creates collection using userSchema for the model
