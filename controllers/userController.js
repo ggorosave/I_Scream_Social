@@ -32,9 +32,8 @@ module.exports = {
     },
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId })
-        // TODO: fix
-            // .populate('screams', 'friends')
-            .populate('screams')
+            .populate(['screams', 'friends'])
+            // .populate('screams')
             .then((user) => !user ? res.status(404).json({ message: 'Could not find user with the given ID!' }) : res.json(user))
             .catch((err) => {
                 console.log(err);
@@ -108,7 +107,6 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
-    // UNTESTED
     removeFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },

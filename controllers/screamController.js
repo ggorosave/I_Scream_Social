@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongoose').Types;
 const Scream = require('../models/Scream');
 const User = require('../models/User');
 
@@ -57,7 +56,6 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    // UNTESTED
     addReaction(req, res) {
         Scream.findOneAndUpdate(
             { _id: req.params.screamId },
