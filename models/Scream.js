@@ -22,6 +22,10 @@ const screamSchema = new Schema(
             type: String,
             required: true,
         },
+        userId: {
+            type: Schema.Types.ObjectId,
+            require: true,
+        },
         // imports reactions subdoc and set them in an array here
         reactions: [reactionSchema],
     },

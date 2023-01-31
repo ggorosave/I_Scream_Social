@@ -14,6 +14,7 @@ const { ObjectId } = require('mongoose').Types;
 // const { User, Scream } = require('../models');
 const User = require('../models/User');
 const Scream = require('../models/Scream');
+const { Schema } = require('mongoose');
 
 module.exports = {
 
@@ -33,7 +34,6 @@ module.exports = {
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId })
             .populate(['screams', 'friends'])
-            // .populate('screams')
             .then((user) => !user ? res.status(404).json({ message: 'Could not find user with the given ID!' }) : res.json(user))
             .catch((err) => {
                 console.log(err);
@@ -67,26 +67,17 @@ module.exports = {
     // Untested - check whether scream removed
     deleteUser(req, res) {
 
-        // finds user by id
-        User.findOneAndRemove({ _id: req.params.userId })
-            .then((user) => {
+        Scream.deleteMany({ userId: req.params.userId })
+            .then((data) => 
+                !data
+                    ? res.status(404).json({ message: 'Could not find screams with the given user id!' })
+                    : User.findOneAndRemove({ _id: req.params.userId })
+            )
+            .then((user) =>
                 !user
                     ? res.status(404).json({ message: 'Could not find user with the given ID!' })
-
-                    // finds screams with the associated user id
-                    : Scream.findOneAndUpdate(
-                        { users: req.params.userId },
-
-                        // removes scream with the associated user id
-                        { $pull: { users: req.params.userId } },
-                        { new: true }
-                    )
-            })
-            .then((scream) => {
-                !scream
-                    ? res.status(404).json({ message: 'Could not find screams with the given user ID!' })
-                    : res.json({ message: 'User successfully deleted' })
-            })
+                    : res.json({ message: 'User deleted!'})
+            )
             .catch((err) => {
                 console.log(err);
                 return res.status(500).json(err);
