@@ -22,15 +22,15 @@ const userSchema = new Schema(
             }
         },
         // screams - reference screams
-        screams: {
+        screams: [{
             type: Schema.Types.ObjectId,
-            ref: 'Scream',
-        },
+            ref: 'scream',
+        }],
         // friends - reference users here (self-reference)
-        friends: {
+        friends: [{
             type: Schema.Types.ObjectId,
-            ref: 'User',
-        }
+            ref: 'user',
+        }]
     },
     {
         toJSON: {
@@ -41,13 +41,13 @@ const userSchema = new Schema(
     }
 );
 
-// UNCOMMENT LATER
 // virtual to retrieve the length of the user's friends
-// userSchema
-//     .virtual('friendCount')
-//     .get(function () {
-//         return this.friends.length;
-//     });
+userSchema
+    .virtual('friendCount')
+    .get(function () {
+        return this.friends.length;
+    });
+
 
 // creates collection using userSchema for the model
 const User = model('user', userSchema);
