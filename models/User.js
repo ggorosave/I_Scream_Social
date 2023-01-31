@@ -48,10 +48,6 @@ userSchema
         return this.friends.length;
     });
 
-// userSchema.pre('remove', async function(next) {
-//     await this.model('Scream').deleteMany({ _id: this.screams._id });
-//     next();
-// });    
 
 // creates collection using userSchema for the model
 const User = model('user', userSchema);
