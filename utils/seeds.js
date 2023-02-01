@@ -1,8 +1,6 @@
 // add other data.js files to utils?
 const connection = require('../config/connection');
-// const { User, Scream } = require('../models');
-const User = require('../models/User');
-const Scream = require('../models/Scream');
+const { User, Scream } = require('../models');
 const { insertMany } = require('../models/User');
 
 connection.on('error', (err) => err);
