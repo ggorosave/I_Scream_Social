@@ -1,5 +1,4 @@
-const Scream = require('../models/Scream');
-const User = require('../models/User');
+const { User, Scream } = require('../models');
 
 module.exports = {
     getScreams(req, res) {
