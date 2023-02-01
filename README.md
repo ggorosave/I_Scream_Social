@@ -6,9 +6,9 @@ Social media has become such a prevalent and essential part of modern society. I
 
 ### Demo Video
 
+https://user-images.githubusercontent.com/103039442/215921991-52b100a2-ae5f-4953-b143-36856fe4bb51.mp4
 
-
-- [Link to Video on Google Drive]()
+- [Link to Video on Google Drive](https://drive.google.com/file/d/10tI-lEGthWs_SKFCZn7FXHLXV1PnvMcL/view?usp=share_link)
 
 ## Table of Contents 
 
